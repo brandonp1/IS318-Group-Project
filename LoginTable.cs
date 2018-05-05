@@ -18,8 +18,12 @@ namespace MailedMixers
         [PrimaryKey, AutoIncrement, Column("_UserID")]
         public int userid { get; set; }
         [MaxLength(25)]
-        public string username { get; set; }
-        [MaxLength(15)]
+        public string email { get; set; }
+        [MaxLength(30)]
         public string password { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string dateOfBirth { get; set; }
+
     }
 }

@@ -14,7 +14,7 @@ using SQLite;
 
 namespace MailedMixers.Activities
 {
-   
+
     [Activity(Label = "Login Activity", MainLauncher = true)]
     public class LoginActivity : Activity
     {
@@ -22,7 +22,6 @@ namespace MailedMixers.Activities
         EditText txtPassword;
         Button btnLogin;
         Button btnRegister;
-       // ImageView IVlogo;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -33,7 +32,6 @@ namespace MailedMixers.Activities
             txtPassword = FindViewById<EditText>(Resource.Id.txtPassword);
             btnLogin = FindViewById<Button>(Resource.Id.btnLogin);
             btnRegister = FindViewById<Button>(Resource.Id.btnRegister);
-           // IVlogo = FindViewById<ImageView>(Resource.Id.IVLogo);
 
             btnLogin.Click += BtnLogin_Click;
             btnRegister.Click += BtnRegister_Click;
@@ -41,7 +39,7 @@ namespace MailedMixers.Activities
 
         private void BtnRegister_Click(object sender, EventArgs e)
         {
-            //StartActivity(typeof(RegisterActivity));
+            StartActivity(typeof(RegisterActivity));
         }
 
         private void BtnLogin_Click(object sender, EventArgs e)
@@ -51,7 +49,7 @@ namespace MailedMixers.Activities
                 string dpPath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "user.db3"); //Call Database  
                 var db = new SQLiteConnection(dpPath);
                 var data = db.Table<LoginTable>(); //Call Table  
-                var data1 = data.Where(x => x.username == txtEmail.Text && x.password == txtPassword.Text).FirstOrDefault(); //Linq Query  
+                var data1 = data.Where(x => x.email == txtEmail.Text && x.password == txtPassword.Text).FirstOrDefault(); //Linq Query  
                 if (data1 != null)
                 {
                     Toast.MakeText(this, "Login Success", ToastLength.Short).Show();
@@ -65,6 +63,7 @@ namespace MailedMixers.Activities
             {
                 Toast.MakeText(this, ex.ToString(), ToastLength.Short).Show();
             }
+            StartActivity(typeof(ShippingActivity));
         }
 
         public string CreateDB()
@@ -78,3 +77,4 @@ namespace MailedMixers.Activities
         }
     }
 }
+
